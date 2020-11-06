@@ -8,10 +8,10 @@ import (
 
 type (
 	Config struct {
-		Category   string
-		Source     string
-		Version    string
-		TextWriter Writer
+		Category string
+		Source   string
+		Version  string
+		Writer   Writer
 	}
 
 	Logger struct {
@@ -27,7 +27,7 @@ func NewLogger(conf *Config) *Logger {
 		category: conf.Category,
 		source:   conf.Source,
 		version:  conf.Version,
-		writer:   conf.TextWriter,
+		writer:   conf.Writer,
 	}
 }
 

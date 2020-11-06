@@ -14,7 +14,7 @@ func TestJsonTextWriter(t *testing.T) {
 		Category: "demo-api-server",
 		Source:   "192.168.56.51",
 		Version:  "v1.0.1",
-		TextWriter: &log.JsonTextWriter{
+		Writer: &log.JsonTextWriter{
 			Indent: "    ",
 			Stream: log.MixStreams(&buffer),
 		},
@@ -62,7 +62,7 @@ func TestPlainTextWriter(t *testing.T) {
 		Category: "demo-api-server",
 		Source:   "192.168.56.51",
 		Version:  "v1.0.1",
-		TextWriter: &log.PlainTextWriter{
+		Writer: &log.PlainTextWriter{
 			Stream: &buffer,
 		},
 	})
@@ -94,7 +94,7 @@ func TestMixStreams(t *testing.T) {
 		Category: "demo-api-server",
 		Source:   "192.168.56.51",
 		Version:  "v1.0.1",
-		TextWriter: &log.PlainTextWriter{
+		Writer: &log.PlainTextWriter{
 			Stream: log.MixStreams(
 				&buffer1,
 				&buffer2,
@@ -136,7 +136,7 @@ func TestUseFilter(t *testing.T) {
 		Category: "demo-api-server",
 		Source:   "192.168.56.51",
 		Version:  "v1.0.1",
-		TextWriter: &log.FilterableTextWriter{
+		Writer: &log.FilterableTextWriter{
 			Writer: &log.PlainTextWriter{
 				Stream: &buffer,
 			},
@@ -178,7 +178,7 @@ func TestMixWriters(t *testing.T) {
 		Category: "demo-api-server",
 		Source:   "192.168.56.51",
 		Version:  "v1.0.1",
-		TextWriter: log.MixWriters(
+		Writer: log.MixWriters(
 			&log.JsonTextWriter{
 				Indent: "    ",
 				Stream: &buffer1,
