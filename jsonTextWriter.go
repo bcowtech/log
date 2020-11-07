@@ -23,6 +23,7 @@ func (w *JsonTextWriter) Write(
 
 	w.write(&struct {
 		Type      string `json:"type"`
+		Severity  int    `json:"severity"`
 		EventId   string `json:"event_id"`
 		Category  string `json:"category"`
 		Source    string `json:"source"`
@@ -31,12 +32,13 @@ func (w *JsonTextWriter) Write(
 		Timestamp int64  `json:"timestamp"`
 	}{
 		Type:      logType.Name(),
+		Severity:  logType.Severity(),
 		EventId:   eventID,
 		Category:  category,
 		Source:    source,
 		Version:   version,
 		Message:   message,
-		Timestamp: timestamp.UnixNano() / int64(time.Millisecond),
+		Timestamp: (timestamp.UnixNano() / int64(time.Millisecond)),
 	})
 }
 
