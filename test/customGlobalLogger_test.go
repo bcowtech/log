@@ -21,6 +21,9 @@ func TestCustomGlobalLogger(t *testing.T) {
 	}))
 
 	buffer.Reset()
+	if len(buffer.String()) != 0 {
+		t.Errorf("buffer should be empty")
+	}
 
 	rescueStdout := os.Stdout
 	r, w, _ := os.Pipe()

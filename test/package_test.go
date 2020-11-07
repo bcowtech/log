@@ -21,6 +21,9 @@ func TestJsonTextWriter(t *testing.T) {
 	})
 
 	buffer.Reset()
+	if len(buffer.String()) != 0 {
+		t.Errorf("buffer should be empty")
+	}
 	logger.Write(log.PASS, "log message successful")
 	/*
 	 * {
@@ -38,6 +41,9 @@ func TestJsonTextWriter(t *testing.T) {
 	}
 
 	buffer.Reset()
+	if len(buffer.String()) != 0 {
+		t.Errorf("buffer should be empty")
+	}
 	logger.Write(log.DEBUG, "log debug message")
 	/*
 	 * {
@@ -68,6 +74,9 @@ func TestPlainTextWriter(t *testing.T) {
 	})
 
 	buffer.Reset()
+	if len(buffer.String()) != 0 {
+		t.Errorf("buffer should be empty")
+	}
 	logger.Write(log.PASS, "log message successful")
 	/*
 	 * 2020-11-05T12:46:16.780Z PASS [demo-api-server/192.168.56.51 - v1.0.1] log message successful (#e79dd213-3778-434c-86fc-c645c6f5935b)
@@ -77,6 +86,9 @@ func TestPlainTextWriter(t *testing.T) {
 	}
 
 	buffer.Reset()
+	if len(buffer.String()) != 0 {
+		t.Errorf("buffer should be empty")
+	}
 	logger.Write(log.DEBUG, "log debug message")
 	/*
 	 * 2020-11-05T12:46:16.780Z DEBUG [demo-api-server/192.168.56.51 - v1.0.1] log debug message (#978d9988-a225-4e87-943d-5f13d555494f)
@@ -103,7 +115,13 @@ func TestMixStreams(t *testing.T) {
 	})
 
 	buffer1.Reset()
+	if len(buffer1.String()) != 0 {
+		t.Errorf("buffer1 should be empty")
+	}
 	buffer2.Reset()
+	if len(buffer2.String()) != 0 {
+		t.Errorf("buffer2 should be empty")
+	}
 	logger.Write(log.PASS, "log message successful")
 	/*
 	 * 2020-11-05T12:46:16.780Z PASS [demo-api-server/192.168.56.51 - v1.0.1] log message successful (#e79dd213-3778-434c-86fc-c645c6f5935b)
@@ -116,7 +134,13 @@ func TestMixStreams(t *testing.T) {
 	}
 
 	buffer1.Reset()
+	if len(buffer1.String()) != 0 {
+		t.Errorf("buffer1 should be empty")
+	}
 	buffer2.Reset()
+	if len(buffer2.String()) != 0 {
+		t.Errorf("buffer2 should be empty")
+	}
 	logger.Write(log.DEBUG, "log debug message")
 	/*
 	 * 2020-11-05T12:46:16.780Z DEBUG [demo-api-server/192.168.56.51 - v1.0.1] log debug message (#978d9988-a225-4e87-943d-5f13d555494f)
@@ -147,6 +171,9 @@ func TestUseFilter(t *testing.T) {
 	})
 
 	buffer.Reset()
+	if len(buffer.String()) != 0 {
+		t.Errorf("buffer should be empty")
+	}
 	logger.Write(log.PASS, "log message successful")
 	/*
 	* 2020-11-05T13:07:01.571Z PASS [demo-api-server/192.168.56.51 - v1.0.1] log message successful (#60cf7b3b-a09c-43fe-aec0-e8ceb48750ba)
@@ -156,12 +183,18 @@ func TestUseFilter(t *testing.T) {
 	}
 
 	buffer.Reset()
+	if len(buffer.String()) != 0 {
+		t.Errorf("buffer should be empty")
+	}
 	logger.Write(log.DEBUG, "log debug message")
 	if len(buffer.String()) != 0 {
 		t.Errorf("message should be empty")
 	}
 
 	buffer.Reset()
+	if len(buffer.String()) != 0 {
+		t.Errorf("buffer should be empty")
+	}
 	logger.Write(log.ERR, "log err message")
 	/*
 	 * 2020-11-05T13:07:01.571Z ERR [demo-api-server/192.168.56.51 - v1.0.1] log err message (#89bb871c-60e6-43c2-8399-af6c48a4770c)
@@ -195,7 +228,13 @@ func TestMixWriters(t *testing.T) {
 	})
 
 	buffer1.Reset()
+	if len(buffer1.String()) != 0 {
+		t.Errorf("buffer1 should be empty")
+	}
 	buffer2.Reset()
+	if len(buffer2.String()) != 0 {
+		t.Errorf("buffer2 should be empty")
+	}
 	logger.Write(log.PASS, "log message successful")
 	/*
 	 * {
@@ -219,7 +258,13 @@ func TestMixWriters(t *testing.T) {
 	}
 
 	buffer1.Reset()
+	if len(buffer1.String()) != 0 {
+		t.Errorf("buffer1 should be empty")
+	}
 	buffer2.Reset()
+	if len(buffer2.String()) != 0 {
+		t.Errorf("buffer2 should be empty")
+	}
 	logger.Write(log.DEBUG, "log debug message")
 	/*
 	 * {
@@ -240,7 +285,13 @@ func TestMixWriters(t *testing.T) {
 	}
 
 	buffer1.Reset()
+	if len(buffer1.String()) != 0 {
+		t.Errorf("buffer1 should be empty")
+	}
 	buffer2.Reset()
+	if len(buffer2.String()) != 0 {
+		t.Errorf("buffer2 should be empty")
+	}
 	logger.Write(log.ERR, "log err message")
 	/*
 	 * {
@@ -313,7 +364,13 @@ func TestEventLog(t *testing.T) {
 	}
 
 	buffer1.Reset()
+	if len(buffer1.String()) != 0 {
+		t.Errorf("buffer1 should be empty")
+	}
 	buffer2.Reset()
+	if len(buffer2.String()) != 0 {
+		t.Errorf("buffer2 should be empty")
+	}
 	event.WriteTo(writer)
 	/*
 	 * {
