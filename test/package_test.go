@@ -265,6 +265,7 @@ func TestMixWriters(t *testing.T) {
 }
 
 func TestEventLog(t *testing.T) {
+
 	var buffer1, buffer2 bytes.Buffer
 
 	writer := log.MixWriters(
@@ -347,7 +348,7 @@ func TestEventLog(t *testing.T) {
 	 * }
 	 */
 	if len(buffer1.String()) == 0 {
-		t.Errorf("message should be empty")
+		t.Errorf("message should not be empty")
 	}
 	/*
 	 *1970-01-01T00:00:00.000Z PASS [demo-api-server/192.168.56.51 - v1.0.1] log message successful (#68dd82bf-4542-40c1-a892-0bd1cb217702)
@@ -373,6 +374,6 @@ func TestEventLog(t *testing.T) {
 	 *
 	 */
 	if len(buffer2.String()) == 0 {
-		t.Errorf("message should be empty")
+		t.Errorf("message should not be empty")
 	}
 }
