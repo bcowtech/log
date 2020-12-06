@@ -49,3 +49,7 @@ func (l *Logger) Write(
 		message,
 		timestamp)
 }
+
+func (l *Logger) getWriter() Writer {
+	return l.writer
+}

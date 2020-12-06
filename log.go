@@ -51,6 +51,10 @@ func Write(
 	GetLogger().Write(logType, message)
 }
 
+func WriteEventLog(log EventLog) {
+	GetLogger().getWriter().WriteEventLog(log)
+}
+
 func innerSetUp(logger *Logger) {
 	once.Do(func() {
 		if logger == nil {
