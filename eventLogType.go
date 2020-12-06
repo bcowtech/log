@@ -56,6 +56,10 @@ func (t EventLogType) Severity() int {
 	return 0
 }
 
+func (t EventLogType) IsValid() bool {
+	return t != NONE
+}
+
 func (t EventLogType) Name() string {
 	return eventLogTypeNames[t]
 }
