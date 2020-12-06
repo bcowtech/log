@@ -67,7 +67,7 @@ func (w *PlainTextWriter) WriteEventLog(log EventLog) {
 		"%s %s [%s/%s - %s] %s (#%s)\n"+
 			"\n"+
 			"Request:\n"+
-			"%s %s?%s\n"+
+			"%s %s%s\n"+
 			"%s\n"+
 			"%s\n"+
 			"\n"+
@@ -94,7 +94,7 @@ func (w *PlainTextWriter) WriteEventLog(log EventLog) {
 		// Request
 		log.Details.Request.Method,
 		log.Details.Request.Path,
-		log.Details.Request.QueryString,
+		w.formatQueryString(log.Details.Request.QueryString),
 		log.Details.Request.Header,
 		log.Details.Request.Body,
 		// Response
@@ -111,6 +111,13 @@ func (w *PlainTextWriter) WriteEventLog(log EventLog) {
 
 func (w *PlainTextWriter) write(format string, a ...interface{}) {
 	fmt.Fprintf(w.Stream, format, a...)
+}
+
+func (w *PlainTextWriter) formatQueryString(input string) string {
+	if len(input) > 0 {
+		return "?" + input
+	}
+	return ""
 }
 
 func (w *PlainTextWriter) ensureDateTimeFormatter() {
