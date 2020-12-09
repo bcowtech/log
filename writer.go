@@ -11,5 +11,5 @@ type Writer interface {
 		version string,
 		message string,
 		timestamp time.Time)
-	WriteEventLog(log EventLog)
+	WriteEventLog(log *EventLog)
 }

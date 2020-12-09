@@ -31,7 +31,7 @@ func (w *compositeFilter) CanWrite(
 	return true
 }
 
-func (w *compositeFilter) CanWriteEventLog(log EventLog) bool {
+func (w *compositeFilter) CanWriteEventLog(log *EventLog) bool {
 	for _, filter := range w.filters {
 		ok := filter.CanWriteEventLog(log)
 		if !ok {

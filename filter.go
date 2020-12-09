@@ -11,5 +11,5 @@ type Filter interface {
 		version string,
 		message string,
 		timestamp time.Time) bool
-	CanWriteEventLog(log EventLog) bool
+	CanWriteEventLog(log *EventLog) bool
 }

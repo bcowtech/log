@@ -27,7 +27,7 @@ func (w *compositeWriter) Write(
 	}
 }
 
-func (w *compositeWriter) WriteEventLog(log EventLog) {
+func (w *compositeWriter) WriteEventLog(log *EventLog) {
 	for _, writer := range w.writers {
 		writer.WriteEventLog(log)
 	}

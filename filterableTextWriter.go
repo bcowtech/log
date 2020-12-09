@@ -36,7 +36,7 @@ func (w *FilterableTextWriter) Write(
 	}
 }
 
-func (w *FilterableTextWriter) WriteEventLog(log EventLog) {
+func (w *FilterableTextWriter) WriteEventLog(log *EventLog) {
 	if w.Filter.CanWriteEventLog(log) {
 		w.Writer.WriteEventLog(log)
 	}

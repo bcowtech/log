@@ -37,7 +37,7 @@ func (w *PlainTextWriter) Write(
 		eventID)
 }
 
-func (w *PlainTextWriter) WriteEventLog(log EventLog) {
+func (w *PlainTextWriter) WriteEventLog(log *EventLog) {
 	timestamp := transformMillisecondTime(log.Timestamp)
 
 	w.ensureDateTimeFormatter()

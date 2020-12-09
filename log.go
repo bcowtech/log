@@ -51,7 +51,7 @@ func Write(
 	GetLogger().Write(logType, message)
 }
 
-func WriteEventLog(log EventLog) {
+func WriteEventLog(log *EventLog) {
 	GetLogger().getWriter().WriteEventLog(log)
 }
 

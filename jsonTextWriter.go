@@ -42,8 +42,8 @@ func (w *JsonTextWriter) Write(
 	})
 }
 
-func (w *JsonTextWriter) WriteEventLog(log EventLog) {
-	w.write(&log)
+func (w *JsonTextWriter) WriteEventLog(log *EventLog) {
+	w.write(log)
 }
 
 func (w *JsonTextWriter) write(v interface{}) {

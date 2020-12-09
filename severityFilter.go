@@ -18,7 +18,7 @@ func (w *SeverityFilter) CanWrite(
 	return w.canWrite(logType)
 }
 
-func (w *SeverityFilter) CanWriteEventLog(log EventLog) bool {
+func (w *SeverityFilter) CanWriteEventLog(log *EventLog) bool {
 	return w.canWrite(log.Type)
 }
 

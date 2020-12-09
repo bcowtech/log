@@ -49,7 +49,7 @@ type (
 	}
 )
 
-func (l EventLog) WriteTo(w Writer) {
+func (l *EventLog) WriteTo(w Writer) {
 	w.WriteEventLog(l)
 }
 
