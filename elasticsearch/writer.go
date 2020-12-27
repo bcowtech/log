@@ -1,39 +1,27 @@
 package elasticsearch
 
 import (
-	"encoding/json"
-	"log"
-	"net/http"
-	"os"
 	"time"
 
 	bcowlog "gitlab.bcowtech.de/bcow-go/log"
 )
 
-var (
-	defaultLogger = log.New(os.Stdout, "[bcow-go/log/elasticsearch]", log.LstdFlags|log.Lmicroseconds|log.Llongfile|log.Lmsgprefix)
-)
-
 type Writer struct {
-	address          string
-	indexPartitioner IndexPartitioner
-
-	pingClient  *http.Client
-	queryClient *http.Client
-	logger      *log.Logger
+	forwarder     *Forwarder
+	indexProvider IndexProvider
 }
 
-func NewWriter(opt *Option) *Writer {
-	queryClient := &http.Client{
-		Timeout: opt.QueryTimeout,
+func NewWriter(forwarder *Forwarder, indexProvider IndexProvider) *Writer {
+	if forwarder == nil {
+		panic("argument 'forwarder' cannot be nil")
+	}
+	if indexProvider == nil {
+		panic("argument 'indexPartitioner' cannot be nil")
 	}
 
 	return &Writer{
-		address:          opt.Address,
-		indexPartitioner: opt.IndexPartitioner,
-		pingClient:       &http.Client{},
-		queryClient:      queryClient,
-		logger:           defaultLogger,
+		forwarder:     forwarder,
+		indexProvider: indexProvider,
 	}
 }
 
@@ -59,26 +47,5 @@ func (w *Writer) Write(
 }
 
 func (w *Writer) WriteEventLog(eventLog *bcowlog.EventLog) {
-	defer func() {
-		err := recover()
-		if err != nil {
-			w.logger.Printf("ERR cannot update EventLog (#%s), %v", eventLog.EventID, err)
-		}
-	}()
-
-	url := makeDocumentAPIUri(w.address, w.indexPartitioner.IndexName(), eventLog.EventID)
-	body, err := json.Marshal(eventLog)
-	if err != nil {
-		panic(err)
-	}
-
-	ok := update(w.queryClient, url, body)
-	if !ok {
-		w.logger.Printf("FAIL cannot update EventLog (#%s)", eventLog.EventID)
-	}
-}
-
-func (w *Writer) Ping(timeout time.Duration) bool {
-	w.pingClient.Timeout = timeout
-	return ping(w.pingClient, w.address)
+	w.forwarder.write(w.indexProvider, eventLog)
 }

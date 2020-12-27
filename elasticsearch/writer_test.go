@@ -8,29 +8,29 @@ import (
 	"gitlab.bcowtech.de/bcow-go/log"
 )
 
+var (
+	elasticsearchAddress = os.Getenv("ELASTICSEARCH_ADDRESS")
+)
+
 func TestPing(t *testing.T) {
-	writer := NewWriter(&Option{
-		Address:          "http://192.168.56.54:9200",
-		IndexPartitioner: ImmutableIndexPartitioner("service-access-log-000001"),
-		QueryTimeout:     15 * time.Second,
+	forwarder := NewForwarder(&Option{
+		Address:      elasticsearchAddress,
+		QueryTimeout: 15 * time.Second,
 	})
 
-	ok := writer.Ping(3 * time.Second)
+	ok := forwarder.Ping(3 * time.Second)
 	if !ok {
 		t.Errorf("Ping() should be ok")
 	}
 }
 
-var (
-	elasticsearchAddress = os.Getenv("ELASTICSEARCH_ADDRESS")
-)
-
 func TestWriteEventLog(t *testing.T) {
-	writer := NewWriter(&Option{
-		Address:          elasticsearchAddress,
-		IndexPartitioner: ImmutableIndexPartitioner("service-access-log-000001"),
-		QueryTimeout:     15 * time.Second,
-	})
+	writer := NewWriter(
+		NewForwarder(&Option{
+			Address:      elasticsearchAddress,
+			QueryTimeout: 15 * time.Second,
+		}),
+		ImmutableIndexProvider("service-access-log-000001"))
 
 	eventLog := &log.EventLog{
 		EventID:  "192.168.56.54-0006",

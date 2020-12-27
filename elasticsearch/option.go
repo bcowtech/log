@@ -4,18 +4,17 @@ import "time"
 
 type (
 	Option struct {
-		Address          string
-		IndexPartitioner IndexPartitioner
-		QueryTimeout     time.Duration // no-timeout(0) https://golang.org/pkg/net/http/#Client.Timeout
+		Address      string
+		QueryTimeout time.Duration // no-timeout(0) https://golang.org/pkg/net/http/#Client.Timeout
 	}
 
-	IndexPartitioner interface {
+	IndexProvider interface {
 		IndexName() string
 	}
 )
 
-type ImmutableIndexPartitioner string
+type ImmutableIndexProvider string
 
-func (p ImmutableIndexPartitioner) IndexName() string {
+func (p ImmutableIndexProvider) IndexName() string {
 	return string(p)
 }
