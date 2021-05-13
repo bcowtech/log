@@ -3,7 +3,7 @@ package test
 import (
 	"testing"
 
-	log "gitlab.bcowtech.de/bcow-go/log"
+	log "github.com/bcowtech/log"
 )
 
 func TestEventLogType(t *testing.T) {

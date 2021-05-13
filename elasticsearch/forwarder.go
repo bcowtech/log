@@ -7,11 +7,11 @@ import (
 	"os"
 	"time"
 
-	bcowlog "gitlab.bcowtech.de/bcow-go/log"
+	bcowlog "github.com/bcowtech/log"
 )
 
 var (
-	defaultLogger = log.New(os.Stdout, "[bcow-go/log/elasticsearch]", log.LstdFlags|log.Lmicroseconds|log.Llongfile|log.Lmsgprefix)
+	defaultLogger = log.New(os.Stdout, "[bcowtech/log/elasticsearch]", log.LstdFlags|log.Lmicroseconds|log.Llongfile|log.Lmsgprefix)
 )
 
 type Forwarder struct {

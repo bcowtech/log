@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	log "gitlab.bcowtech.de/bcow-go/log"
+	log "github.com/bcowtech/log"
 )
 
 func TestJsonTextWriter(t *testing.T) {

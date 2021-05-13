@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"gitlab.bcowtech.de/bcow-go/log"
+	"github.com/bcowtech/log"
 )
 
 var (

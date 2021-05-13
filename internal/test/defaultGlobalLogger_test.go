@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	log "gitlab.bcowtech.de/bcow-go/log"
+	log "github.com/bcowtech/log"
 )
 
 func TestDefaultGlobalLogger(t *testing.T) {

@@ -3,7 +3,7 @@ package elasticsearch
 import (
 	"time"
 
-	bcowlog "gitlab.bcowtech.de/bcow-go/log"
+	bcowlog "github.com/bcowtech/log"
 )
 
 type Writer struct {
